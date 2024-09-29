@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import regex as re
+import sys
 
 
 datasets = [
@@ -33,16 +34,17 @@ def modify_prompt(new_prompt, dataset):
             new_prompt[i]['label'] = new_df[new_df['Content'] == new_prompt[i]['text']].iloc[0]['EventTemplate']
     return new_prompt
 
-
+shot_32 = sys.argv[1]
+print(shot_32)
 def process(dataset):
     new_prompt = []
-    with open (f"datasets/{dataset}/{32}shot/1.json", "r") as fr:
+    with open (f"{shot_32}/{dataset}/{32}shot/1.json", "r") as fr:
         lines = fr.readlines()
         for line in lines:
             data = json.loads(line)
             new_prompt.append(data)
     new_prompt = modify_prompt(new_prompt, dataset)
-    with open (f"datasets/{dataset}/{32}shot/2.json", "w") as fw:
+    with open (f"{shot_32}/{dataset}/{32}shot/2.json", "w") as fw:
         for data in new_prompt:
             fw.write(json.dumps(data) + "\n")
 
