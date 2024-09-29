@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -ex
-for k in {0..0}; do
+for k in {2..2}; do
 	echo $k
 
 	cd ../evaluation/

@@ -73,6 +73,11 @@ class MainArguments:
         metadata={"help": "The number of examples use for tuning"}
     )
 
+    brain: Optional[str] = field(
+        default=None,
+        metadata={"help": "brain results to calibrate pd dataframe Content"}
+    )
+
 
 @dataclass
 class TrainArguments:

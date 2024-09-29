@@ -62,7 +62,14 @@ def train():
 
             if completed_steps >= train_args.max_train_steps:
                 break
-
+    # hacker - start
+    if main_args.brain is not None:
+        import os
+        print('Use brain to calibrate. Good!!!')
+        task_args.log_file = os.path.join(main_args.brain,
+                                          os.path.basename(task_args.log_file))
+        print('task_args.log_file: {}'.format(task_args.log_file))
+    # hacker - end
     template_extraction(tokenizer,
                         model,
                         accelerator,
