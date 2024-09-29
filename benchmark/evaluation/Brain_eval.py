@@ -89,6 +89,18 @@ if __name__ == "__main__":
             parser = LogParser
         # run evaluator for a dataset
         print(setting['log_format'])
+        # debug - start - lezhang.thu
+        if True:
+            indir = os.path.join(input_dir, os.path.dirname(log_file))
+            log_file_basename = os.path.basename(log_file)
+            if args.oracle_template_correction:
+                # use a structured log file with corrected oracle templates
+                groundtruth = os.path.join(
+                    indir, log_file_basename + '_structured_corrected.csv')
+            else:
+                groundtruth = os.path.join(
+                    indir, log_file_basename + '_structured.csv')
+        # debug - end - lezhang.thu
         evaluator(dataset=dataset,
                   input_dir=input_dir,
                   output_dir=output_dir,
@@ -102,6 +114,7 @@ if __name__ == "__main__":
                       'delimeter': setting["delimiter"],
                       'threshold': setting["theshold"],
                       'logname': dataset,
+                      'gt_check_consistency_only': groundtruth,
                   },
                   otc=args.oracle_template_correction,
                   complex=args.complex,
