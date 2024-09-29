@@ -15,5 +15,5 @@ for dataset in Apache BGL Hadoop HDFS HealthApp HPC Linux Mac OpenSSH OpenStack 
             --log_file datasets/${dataset}/${dataset}_2k.log_structured.csv \
             --shot $shot \
             --dataset_name ${dataset} \
-            --task_output_dir "../../result/result_LogPPT_2k/"
+            --task_output_dir "result_LogPPT_2k"
     done

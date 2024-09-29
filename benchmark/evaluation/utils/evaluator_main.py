@@ -33,7 +33,7 @@ def prepare_results(output_dir, otc, complex, frequent):
         os.makedirs(output_dir)
 
     # make a new summary file
-    result_file = 'summary_[otc={},complex={},frequent={}].csv'.format(str(otc), str(int(complex)), str(int(frequent)))
+    result_file = 'summary-otc-{}-complex-{}-frequent-{}.csv'.format(str(otc), str(int(complex)), str(int(frequent)))
     with open(os.path.join(output_dir, result_file), 'w') as csv_file:
         fw = csv.writer(csv_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         # fw.writerow(['Dataset', 'GA_time', 'PA_time', 'TA_time', 'parse_time', 'identified_templates',

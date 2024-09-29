@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 
 def post_average(metric_file, tech, complex, frequent):
     df = pd.read_csv(metric_file, index_col=False)
@@ -8,11 +9,13 @@ def post_average(metric_file, tech, complex, frequent):
     mean_row = df.select_dtypes(include=[np.number]).mean().round(3)
     new_row = pd.DataFrame([['Average']], columns=['Dataset']).join(pd.DataFrame([mean_row.values], columns=mean_row.index))
     df = pd.concat([df, new_row], ignore_index=True)
-    output_path = f"../../result/{tech}.csv"
+    x = os.path.dirname(metric_file)
+    output_path = os.path.join(x, "{}.csv".format(tech))
     if complex != 0:
-        output_path = f"../../result/complex/{tech}.csv"
+        output_path = os.path.join(x, "complex", "{}.csv".format(tech))
     if frequent != 0:
-        output_path = f"../../result/frequent/{tech}.csv"
+        output_path = os.path.join(x, "frequent", "{}.csv".format(tech))
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_csv(output_path, index=False)
     df = pd.read_csv(output_path)
     transposed_df = df.transpose()

@@ -103,6 +103,15 @@ def common_args():
     parser.add_argument('--example_size', type=int,
                         help="Set this if you want to test on frequent dataset",
                         default=0)    
+    # debug - start - lezhang.thu
+    # Add a required argument for --output-dir
+    parser.add_argument(
+        '--output-dir',
+        type=str,
+        required=False,
+        help='The output directory where results will be saved.'
+    )
+    # debug - end - lezhang.thu
     args = parser.parse_args()
     return args
 

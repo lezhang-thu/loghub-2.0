@@ -20,6 +20,7 @@ from typing import List, Optional, Union
 from seqeval.metrics import accuracy_score, classification_report
 
 import datasets
+import evaluate as hf_evaluate
 
 _CITATION = """\
 @inproceedings{ramshaw-marcus-1995-text,
@@ -86,10 +87,12 @@ Returns:
 """
 
 
-@datasets.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Seqeval(datasets.Metric):
+#@datasets.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@hf_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Seqeval(hf_evaluate.Metric):
     def _info(self):
-        return datasets.MetricInfo(
+        #return datasets.MetricInfo(
+        return hf_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             homepage="https://github.com/chakki-works/seqeval",

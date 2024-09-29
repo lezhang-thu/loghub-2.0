@@ -63,7 +63,7 @@ if __name__ == "__main__":
     args = common_args()
     data_type = "full" if args.full_data else "2k"
     input_dir = f"../../{data_type}_dataset/"
-    output_dir = f"../../result/result_LogPPT_{data_type}"
+    output_dir = args.output_dir
     # prepare result_file
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -97,4 +97,4 @@ if __name__ == "__main__":
             result_file=result_file
         )  # it internally saves the results into a summary file
     metric_file = os.path.join(output_dir, result_file)
-    post_average(metric_file, f"LogPPT_{data_type}_complex={args.complex}_frequent={args.frequent}", args.complex, args.frequent)
+    post_average(metric_file, f"LogPPT_{data_type}_complex-{args.complex}_frequent-{args.frequent}", args.complex, args.frequent)
