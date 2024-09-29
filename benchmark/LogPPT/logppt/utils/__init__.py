@@ -44,10 +44,10 @@ benchmark = {
         'log_format': '<Month>  <Date> <Time> <User> <Component>\[<PID>\]( \(<Address>\))?: <Content>',
     },
 
-    'Windows': {
-        'log_file': 'Windows/Windows_2k.log',
-        'log_format': '<Date> <Time>, <Level>                  <Component>    <Content>',
-    },
+    #'Windows': {
+    #    'log_file': 'Windows/Windows_2k.log',
+    #    'log_format': '<Date> <Time>, <Level>                  <Component>    <Content>',
+    #},
 
     'Linux': {
         'log_file': 'Linux/Linux_2k.log',

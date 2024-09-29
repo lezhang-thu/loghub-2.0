@@ -36,7 +36,7 @@ def clean(s):
     -------
     str, preprocessed log message without number tokens and special characters
     """
-    s = re.sub(':|\(|\)|=|,|"|\{|\}|@|$|\[|\]|\||;|\.', ' ', s)
+    s = re.sub(r':|\(|\)|=|,|"|\{|\}|@|$|\[|\]|\||;|\.', ' ', s)
     s = " ".join([word.lower() if word.isupper() else word for word in s.strip().split()])
     s = re.sub('([A-Z][a-z]+)', r' \1', re.sub('([A-Z]+)', r' \1', s))
     s = " ".join([word for word in s.split() if not bool(re.search(r'\d', word))])
@@ -53,10 +53,10 @@ if __name__ == '__main__':
         setting = benchmark[dataset]
         os.makedirs("datasets/{0}".format(dataset), exist_ok=True)
 
-        logdf = log_to_dataframe(f'./logs/{setting["log_file"]}', setting['log_format'])
+        logdf = log_to_dataframe(f'../../2k_dataset/{setting["log_file"]}', setting['log_format'])
         logdf.to_csv(f"datasets/{setting['log_file']}_structured.csv")
 
-        labelled_logs = pd.read_csv(f'./logs/{setting["log_file"]}_structured_corrected.csv')
+        labelled_logs = pd.read_csv(f'../../2k_dataset/{setting["log_file"]}_structured_corrected.csv')
         test_samples = [(row['Content'], row['EventTemplate']) for _, row in labelled_logs.iterrows()]
         template_dict = {k: v for (k, v) in test_samples}
         with open("datasets/{0}/test.json".format(dataset), "w") as f:
