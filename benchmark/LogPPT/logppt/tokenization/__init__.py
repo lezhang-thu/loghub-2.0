@@ -1,1 +1,2 @@
 from logppt.tokenization.log_parsing import parsing_tokenize_dataset
+from logppt.tokenization.x_log_parsing import x_parsing_tokenize_dataset
