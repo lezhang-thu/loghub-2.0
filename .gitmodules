@@ -1,0 +1,3 @@
+[submodule "benchmark/logparser-Brain"]
+	path = benchmark/logparser-Brain
+	url = https://github.com/lezhang-thu/logparser-Brain.git
