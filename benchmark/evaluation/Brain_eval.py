@@ -111,5 +111,5 @@ if __name__ == "__main__":
     metric_file = os.path.join(output_dir, result_file)
     post_average(
         metric_file,
-        f"Drain_{data_type}_complex-{args.complex}_frequent-{args.frequent}",
+        f"Brain_{data_type}_complex-{args.complex}_frequent-{args.frequent}",
         args.complex, args.frequent)
