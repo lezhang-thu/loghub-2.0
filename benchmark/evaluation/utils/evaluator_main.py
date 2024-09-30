@@ -114,13 +114,13 @@ def evaluator(
                 "None" + ',' + \
                 "None" + ',' + \
                 "None" + '\n'
-                # "{:.1f}".format(GA_end_time) + ',' + \
-                # "{:.1f}".format(PA_end_time) + ',' + \
-                # "{:.1f}".format(TA_end_time) + ',' + \
+        # "{:.1f}".format(GA_end_time) + ',' + \
+        # "{:.1f}".format(PA_end_time) + ',' + \
+        # "{:.1f}".format(TA_end_time) + ',' + \
 
         with open(os.path.join(output_dir, result_file), 'a') as summary_file:
             summary_file.write(result)
-        return   
+        return
 
 
     filter_templates = None
@@ -152,23 +152,33 @@ def evaluator(
 
     if filter_templates != None and len(filter_templates) == 0:
         # result = dataset + ',' + \
-                # "None" + ',' + \
-                # "None" + ',' + \
-                # "None" + ',' + \
-                # "None" + ',' + \
-                # "None" + ',' + \
-                # "None" + ',' + \
-                # "None" + ',' + \
-                # "None" + ',' + \
-                # "None" + '\n'
+        # "None" + ',' + \
+        # "None" + ',' + \
+        # "None" + ',' + \
+        # "None" + ',' + \
+        # "None" + ',' + \
+        # "None" + ',' + \
+        # "None" + ',' + \
+        # "None" + ',' + \
+        # "None" + '\n'
 
         # with open(os.path.join(output_dir, result_file), 'a') as summary_file:
-            # summary_file.write(result)
-        return   
+        # summary_file.write(result)
+        return
 
     parsedresult = pd.read_csv(parsedresult, dtype=str)
     parsedresult.fillna("", inplace=True)
+    # hacker - start
+    x_gt = os.path.basename(groundtruth)
+    # hacker - end
     groundtruth = pd.read_csv(groundtruth, dtype=str)
+    # hacker - start
+    if x_gt == 'HPC_full.log_structured.csv':
+        print('Fix the ERROR in {}! Good!!!'.format(x_gt))
+        groundtruth["EventTemplate"] = groundtruth["EventTemplate"].apply(
+            lambda x: 'PSU status ( <*> <*> )'
+            if x == 'PSU status (<*> <*>)' else x)
+    # hacker - end
 
 
     print("Start compute grouping accuracy")

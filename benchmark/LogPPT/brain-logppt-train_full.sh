@@ -1,7 +1,7 @@
 # export CUDA_VISIBLE_DEVICES=5
 set -ex
-#for dataset in Apache BGL Hadoop HDFS HealthApp HPC Linux Mac OpenSSH OpenStack Proxifier Spark Thunderbird Zookeeper; do
-for dataset in Apache; do
+for dataset in Apache BGL Hadoop HDFS HealthApp HPC Linux Mac OpenSSH OpenStack Proxifier Spark Thunderbird Zookeeper; do
+#for dataset in Apache; do
 	shot=32
 	trf="datasets-brain-help-sample-from-full/${dataset}/${shot}shot/3.json"
 	python x_train.py --train_file ${trf} \

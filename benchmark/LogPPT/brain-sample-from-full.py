@@ -14,20 +14,20 @@ from logppt.sampling import jaccard_distance
 from logppt.sampling import adaptive_random_sampling
 
 datasets = [
-    #"Proxifier",
-    #"Linux",
+    "Proxifier",
+    "Linux",
     "Apache",
-    #"Zookeeper",
-    #"Hadoop",
-    #"HealthApp",
-    #"OpenStack",
-    #"HPC",
-    #"Mac",
-    #"OpenSSH",
-    #"Spark",
-    #"Thunderbird",
-    #"BGL",
-    #"HDFS",
+    "Zookeeper",
+    "Hadoop",
+    "HealthApp",
+    "OpenStack",
+    "HPC",
+    "Mac",
+    "OpenSSH",
+    "Spark",
+    "Thunderbird",
+    "BGL",
+    "HDFS",
 ]
 
 
@@ -236,12 +236,19 @@ if __name__ == '__main__':
         brain_df = pd.read_csv(
             os.path.join(brain_dir,
                          '{}_full.log_structured.csv'.format(dataset)))
-        gt_df = pd.read_csv(
-            os.path.join(
-                '../../full_dataset/{}/{}_full.log_structured.csv'.format(
-                    dataset, dataset)))
+        gt_df_path = os.path.join(
+            '../../full_dataset/{}/{}_full.log_structured.csv'.format(
+                dataset, dataset))
+        gt_df = pd.read_csv(gt_df_path)
         # hacker - start
         gt_df["Content"] = brain_df["Content"]
+
+        x_gt = os.path.basename(gt_df_path)
+        if x_gt == 'HPC_full.log_structured.csv':
+            print('Fix the ERROR in {}! Good!!!'.format(x_gt))
+            gt_df["EventTemplate"] = gt_df["EventTemplate"].apply(
+                lambda x: 'PSU status ( <*> <*> )'
+                if x == 'PSU status (<*> <*>)' else x)
         # hacker - end
         z, num_groups = generate_train_data(brain_df)
         x = sample_data(gt_df, weights=z.to_list(), num_groups=num_groups)
