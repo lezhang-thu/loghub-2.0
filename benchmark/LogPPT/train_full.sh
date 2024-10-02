@@ -1,7 +1,7 @@
 # export CUDA_VISIBLE_DEVICES=5
 
-#for dataset in Apache BGL Hadoop HDFS HealthApp HPC Linux Mac OpenSSH OpenStack Proxifier Spark Thunderbird Zookeeper;
-for dataset in Apache; do
+for dataset in Apache BGL Hadoop HDFS HealthApp HPC Linux Mac OpenSSH OpenStack Proxifier Spark Thunderbird Zookeeper; do
+#for dataset in Apache; do
 	shot=32
 	trf="datasets/${dataset}/${shot}shot/2.json"
 	tef="datasets/${dataset}/test.json"
