@@ -24,8 +24,8 @@ if __name__ == '__main__':
 
     all_files = [df.apply(pd.to_numeric) for df in all_files]
     combined_df = pd.concat(all_files, axis=0)
-    average_df = combined_df.groupby(level=0).mean()
+    average_df = combined_df.groupby(level=0).mean().round(3)
     average_df = pd.concat([header_row.to_frame().T, average_df],
                            ignore_index=False)
     average_df = average_df.loc[['Dataset', 'GA', 'PA', 'FGA', 'FTA']]
-    average_df.to_csv(ret_file)
+    average_df.T.to_csv(ret_file)
